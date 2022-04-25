@@ -1,13 +1,17 @@
 <html>
 <div id="container"></div>
 <style>
-	html, body {
-	  width: 100%;
-	  height: 100%;
-	  overflow: hidden;
-	  margin: 0;
-	}
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+}
 
+#container {
+  width: 100%;
+  height: 100%;
+}
 </style>
 <!-- <div class="myDiv">
 </div> -->
@@ -15,14 +19,12 @@
 <script src="https://pchen66.github.io/js/panolens/panolens.min.js"></script>
 </html>
 <script>
-    var panorama, viewer, container, infospot, infospotText, myElement;
+const container = document.querySelector( '#container' );
 
-container = document.querySelector( '#container' );
-// myElement = document.querySelector( '.myDiv' );
 
-panorama = new PANOLENS.ImagePanorama( 'https://blenderartists.org/uploads/default/original/4X/5/5/0/5507eb3841a00da60b35516fc90e72e8085b448e.jpg' );
+const panorama1 = new PANOLENS.ImagePanorama('https://blenderartists.org/uploads/default/original/4X/5/5/0/5507eb3841a00da60b35516fc90e72e8085b448e.jpg' );
+const panorama2 = new PANOLENS.ImagePanorama('https://pchen66.github.io/Panolens/examples/asset/textures/equirectangular/field.jpg');
 
-// you can choose to add either a text or custom dom element
 infospot = new PANOLENS.Infospot( 350, PANOLENS.DataImage.Info );
 infospot.position.set( -1000, -2000, -5000 );
 infospot.addHoverText('Bye');
@@ -31,8 +33,26 @@ infospotText = new PANOLENS.Infospot( 350, PANOLENS.DataImage.Info );
 infospotText.position.set( 1000, -2000, -5000 );
 infospotText.addHoverText('Hello');
 
-panorama.add( infospot, infospotText );
+panorama1.add( infospot, infospotText );
 
-viewer = new PANOLENS.Viewer(container);
-viewer.add( panorama );
+
+panorama1.link(panorama2, new THREE.Vector3(0,0,-5000));
+panorama2.link(panorama1, new THREE.Vector3(0,0,-5000));
+
+// set custom initial lookat position
+panorama1.initialLookAt = new THREE.Vector3(-5000.00, 1203.70, -3590.84);
+panorama2.initialLookAt = new THREE.Vector3(-5000.00, 1203.70, -3590.84);
+
+
+
+
+
+
+// create viewer
+const viewer = new PANOLENS.Viewer( { 
+  container: container, 
+  output: 'console', 
+  initialLookAt: panorama1.initialLookAt } );
+viewer.add( panorama1, panorama2 );
+	
 </script>
