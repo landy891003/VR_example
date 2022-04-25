@@ -1,0 +1,38 @@
+<html>
+<div id="container"></div>
+<style>
+	html, body {
+	  width: 100%;
+	  height: 100%;
+	  overflow: hidden;
+	  margin: 0;
+	}
+
+</style>
+<!-- <div class="myDiv">
+</div> -->
+<script src="https://pchen66.github.io/js/three/three.min.js"></script>
+<script src="https://pchen66.github.io/js/panolens/panolens.min.js"></script>
+</html>
+<script>
+    var panorama, viewer, container, infospot, infospotText, myElement;
+
+container = document.querySelector( '#container' );
+// myElement = document.querySelector( '.myDiv' );
+
+panorama = new PANOLENS.ImagePanorama( 'https://blenderartists.org/uploads/default/original/4X/5/5/0/5507eb3841a00da60b35516fc90e72e8085b448e.jpg' );
+
+// you can choose to add either a text or custom dom element
+infospot = new PANOLENS.Infospot( 350, PANOLENS.DataImage.Info );
+infospot.position.set( -1000, -2000, -5000 );
+infospot.addHoverText('Bye');
+
+infospotText = new PANOLENS.Infospot( 350, PANOLENS.DataImage.Info );
+infospotText.position.set( 1000, -2000, -5000 );
+infospotText.addHoverText('Hello');
+
+panorama.add( infospot, infospotText );
+
+viewer = new PANOLENS.Viewer(container);
+viewer.add( panorama );
+</script>

@@ -1,0 +1,51 @@
+<head>
+  <title>My A-Frame Scene</title>
+  <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script> 
+</head>
+ 
+<body>
+  <a-scene inspector="url:https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+    <a-assets>
+      <img id="skyTexture" src="https://blenderartists.org/uploads/default/original/4X/5/5/0/5507eb3841a00da60b35516fc90e72e8085b448e.jpg">
+      <!-- <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg"> -->
+    </a-assets>  
+    <a-sky src="#skyTexture" ></a-sky>
+    <a-light type="ambient" color="#445451"></a-light>
+    <a-light type="point" intensity="2" position="2 4 4"></a-light>
+    <a-cylinder color="red" position="0 2 -5" rotation="30 45 45" scale="1 1 1" height="0.2" scale-on-mouseenter="to: 2.2 2.2 2.2">
+      <a-animation attribute="rotation" to="90 60 45" direction="alternate" dur="2000" repeat="indenfinite"></a-animation>>
+      <a-animation attribute="position" to="0 2.2 -5" direction="alternate" dur="2000" repeat="indefinite"></a-animation>
+      <a-animation attribute="rotation" begin="click" dur="2000" to="30 405 0"></a-animation>
+      </a-cylinder>
+    <a-sphere color="blue" radius="0.5" position="10 2 -5" rotation="30 45 45" scale="1 1 1" height="0.2" scale-on-mouseenter="to: 2.2 2.2 2.2">
+      <a-animation attribute="rotation" to="90 60 45" direction="alternate" dur="2000" repeat="indenfinite"></a-animation>>
+      <a-animation attribute="position" to="0 2.2 -5" direction="alternate" dur="2000" repeat="indefinite"></a-animation>
+      <a-animation attribute="rotation" begin="click" dur="2000" to="30 -205 0"></a-animation>      
+    </a-sphere>
+    <!-- <a-plane src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane> -->
+    <a-text value="Hello World !" color="#BBB" position="-0.9 0.2 -3" scale="1.5 1.5 1.5"></a-text>
+    <a-camera>
+      <a-cursor color="#FAFAFA"></a-cursor>
+    </a-camera>
+  </a-scene>
+</body>
+<script>
+  AFRAME.registerComponent('scale-on-mouseenter', {
+    schema: {
+      to:{default:'2.5 2.5 2.5'},
+      leave:{default:'1 1 1'}
+    },
+    init:function(){
+      var data =this.data;
+      this.el.addEventListener('mouseenter',function(){
+        this.setAttribute('scale',data.to);
+      });
+      
+      this.el.addEventListener('mouseleave',function(){
+        this.setAttribute('scale',data.leave);
+      });
+    }
+  });
+</script>
+
+
