@@ -8,11 +8,12 @@
  <body>
      <a-scene inspector="url:https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
 
-		<a-entity movement-controls="speed:0.15" position="0 0 6">
-			<a-entity camera position="3 1.6 -1.5"
-			look-controls="pointerLockEnabled:true">
-			<a-cursor></a-cursor>
-			</a-entity>
+		<a-entity movement-controls="speed:0.15" position="3 0.1 4">
+			<a-camera>
+				<a-entity camera
+				look-controls="pointerLockEnabled:true">
+				</a-entity>
+			</a-camera>
 		</a-entity>
 		<a-sky color="#a000a0"></a-sky>
 		<a-asset>
